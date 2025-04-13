@@ -1,48 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const LoadingSpinner = ({ minDisplayTime = 6000 }) => {
   const [percentage, setPercentage] = useState(0);
   const [showLoader, setShowLoader] = useState(true);
-  const startTime = useRef(null);
 
   // Dynamic color based on percentage
   const hue = percentage * 3.6;
   const dotColor = `hsl(${hue}, 80%, 60%)`;
 
   useEffect(() => {
-    startTime.current = Date.now();
-    let animationFrame;
-    let lastUpdate = 0;
-    const totalSteps = 100 / 0.5; // Number of steps needed to reach 100%
+    const startTime = Date.now();
+    let interval;
 
-    const updateLoader = (timestamp) => {
-      if (!lastUpdate) lastUpdate = timestamp;
-      const elapsed = timestamp - lastUpdate;
-      
-      if (elapsed > 50) { // Update every ~50ms
-        setPercentage(prev => {
-          const newPercentage = prev + 0.5;
-          if (newPercentage >= 100) {
-            // Check if minimum display time has elapsed
-            const totalElapsed = Date.now() - startTime.current;
-            if (totalElapsed >= minDisplayTime) {
-              setShowLoader(false);
-              return 100;
-            }
-            return 100; // Stay at 100% until minDisplayTime is reached
+    const updateLoader = () => {
+      setPercentage(prev => {
+        if (prev >= 100) {
+          // Check if minimum display time has elapsed
+          const elapsed = Date.now() - startTime;
+          if (elapsed >= minDisplayTime) {
+            clearInterval(interval);
+            setShowLoader(false);
           }
-          return newPercentage;
-        });
-        lastUpdate = timestamp;
-      }
-      animationFrame = requestAnimationFrame(updateLoader);
+          return 100;
+        }
+        return prev + 0.5; // Slower increment (0.5% instead of 1%)
+      });
     };
 
-    animationFrame = requestAnimationFrame(updateLoader);
+    interval = setInterval(updateLoader, 50); // Longer interval (50ms instead of 30ms)
 
-    return () => {
-      cancelAnimationFrame(animationFrame);
-    };
+    return () => clearInterval(interval);
   }, [minDisplayTime]);
 
   // Inject keyframes globally
@@ -91,7 +78,7 @@ const LoadingSpinner = ({ minDisplayTime = 6000 }) => {
           clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
           background: 'linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%)',
           backgroundSize: '200% 200%',
-          animation: 'slow-rotate 6s linear infinite'
+          animation: 'slow-rotate 6s linear infinite' // Slower rotation (6s)
         }}></div>
 
         {/* Rotating Dot - Slower rotation */}
@@ -100,7 +87,7 @@ const LoadingSpinner = ({ minDisplayTime = 6000 }) => {
           width: '100%',
           height: '100%',
           borderRadius: '50%',
-          animation: 'slow-rotate 4s linear infinite'
+          animation: 'slow-rotate 4s linear infinite' // Slower rotation (4s)
         }}>
           <div style={{
             position: 'absolute',
@@ -124,7 +111,7 @@ const LoadingSpinner = ({ minDisplayTime = 6000 }) => {
               height: '8px',
               background: '#fff',
               borderRadius: '50%',
-              animation: `slow-float 3s infinite ${delay}s`,
+              animation: `slow-float 3s infinite ${delay}s`, // Slower float (3s)
               left: `${15 + (i * 15)}%`,
               top: `${20 + (i * 10)}%`
             }}></div>
@@ -141,7 +128,7 @@ const LoadingSpinner = ({ minDisplayTime = 6000 }) => {
           fontWeight: 'bold',
           color: '#fff',
           textShadow: '0 0 15px rgba(255,255,255,0.5)',
-          animation: 'slow-pulse 3s ease-in-out infinite'
+          animation: 'slow-pulse 3s ease-in-out infinite' // Slower pulse (3s)
         }}>
           {percentage.toFixed(0)}%
         </div>

@@ -12,7 +12,7 @@ const App = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false); // Hide spinner after 3 seconds
-    }, 1400);
+    }, 6000);
 
     return () => clearTimeout(timer);
   }, []);
