@@ -31,7 +31,7 @@ const Hero = () => {
 
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "Resume Aniket.pdf"; // Replace with the actual path to your resume file
+    link.href = "/Resume-Aniket.pdf";// Replace with the actual path to your resume file
     link.download = "Aniket_Resume.pdf";
     link.click();
     setDownloaded(true);
