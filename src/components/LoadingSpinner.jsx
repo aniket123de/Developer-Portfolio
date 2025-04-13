@@ -74,7 +74,7 @@ const LoadingSpinner = ({ minDisplayTime = 4000 }) => {
       opacity: opacity,
       transition: 'opacity 0.5s ease-out'
     }}>
-      <div style={{ position: 'relative', width: '100px', height: '100px' }}>
+      <div style={{ position: 'relative', width: '125px', height: '125px' }}>
         {/* Hexagon Border - Faster rotation */}
         <div style={{
           position: 'absolute',
@@ -113,8 +113,8 @@ const LoadingSpinner = ({ minDisplayTime = 4000 }) => {
           {[0, 0.3, 0.6, 0.9, 1.2].map((delay, i) => (
             <div key={i} style={{
               position: 'absolute',
-              width: '6px',
-              height: '6px',
+              width: '9px',
+              height: '9px',
               background: '#fff',
               borderRadius: '50%',
               animation: `float 2s infinite ${delay}s`, // Faster float (2s)
