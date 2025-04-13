@@ -18,20 +18,16 @@ const LoadingSpinner = ({ minDisplayTime = 4000 }) => {
         if (prev >= 100) {
           const elapsed = Date.now() - startTime;
           if (elapsed >= minDisplayTime) {
-            // Start fade out
             setOpacity(0);
-            setTimeout(() => {
-              setIsVisible(false);
-            }, 500); // Match this with the transition duration
+            setTimeout(() => setIsVisible(false), 500);
           }
           return 100;
         }
-        return prev + 1; // Faster increment (1% instead of 0.5%)
+        return prev + 1;
       });
     };
 
-    interval = setInterval(updateLoader, 30); // Faster interval (30ms instead of 50ms)
-
+    interval = setInterval(updateLoader, 30);
     return () => clearInterval(interval);
   }, [minDisplayTime]);
 
@@ -74,67 +70,82 @@ const LoadingSpinner = ({ minDisplayTime = 4000 }) => {
       opacity: opacity,
       transition: 'opacity 0.5s ease-out'
     }}>
-      <div style={{ position: 'relative', width: '125px', height: '125px' }}>
-        {/* Hexagon Border - Faster rotation */}
-        <div style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-          background: 'linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%)',
-          backgroundSize: '200% 200%',
-          animation: 'rotate 3s linear infinite' // Faster rotation (3s)
-        }}></div>
-
-        {/* Rotating Dot - Faster rotation */}
+      <div style={{ position: 'relative', width: '150px', height: '150px' }}>
+        {/* Smooth Gradient Ring */}
         <div style={{
           position: 'absolute',
           width: '100%',
           height: '100%',
           borderRadius: '50%',
-          animation: 'rotate 2s linear infinite' // Faster rotation (2s)
+          background: `conic-gradient(
+            rgba(99, 102, 241, 0.8) 0%,
+            rgba(99, 102, 241, 0.4) 30%,
+            transparent 60%
+          )`,
+          filter: 'blur(12px)',
+          animation: 'rotate 2.5s linear infinite'
+        }}></div>
+
+        {/* Progress Track */}
+        <svg style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          transform: 'rotate(-90deg)'
         }}>
-          <div style={{
-            position: 'absolute',
-            top: '-6px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '12px',
-            height: '12px',
-            background: dotColor,
-            borderRadius: '50%',
-            boxShadow: `0 0 15px ${dotColor}`,
-            transition: 'all 0.3s ease-out'
-          }}></div>
-        </div>
+          <circle
+            cx="50%"
+            cy="50%"
+            r="45%"
+            fill="transparent"
+            stroke="rgba(255, 255, 255, 0.1)"
+            strokeWidth="4%"
+          />
+        </svg>
 
-        {/* Floating Particles - Faster animation */}
-        <div style={{ position: 'absolute', width: '100%', height: '100%' }}>
-          {[0, 0.3, 0.6, 0.9, 1.2].map((delay, i) => (
-            <div key={i} style={{
-              position: 'absolute',
-              width: '9px',
-              height: '9px',
-              background: '#fff',
-              borderRadius: '50%',
-              animation: `float 2s infinite ${delay}s`, // Faster float (2s)
-              left: `${15 + (i * 15)}%`,
-              top: `${20 + (i * 10)}%`
-            }}></div>
-          ))}
-        </div>
-
-        {/* Percentage Text - Faster pulse */}
+        {/* Central Orb */}
         <div style={{
           position: 'absolute',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          fontSize: '1.7rem',
+          width: '30%',
+          height: '30%',
+          background: dotColor,
+          borderRadius: '50%',
+          filter: `blur(15px)`,
+          boxShadow: `0 0 40px ${dotColor}`,
+          transition: 'all 0.3s ease-out'
+        }}></div>
+
+        {/* Floating Particles */}
+        <div style={{ position: 'absolute', width: '100%', height: '100%' }}>
+          {[0, 0.3, 0.6, 0.9, 1.2].map((delay, i) => (
+            <div key={i} style={{
+              position: 'absolute',
+              width: '8px',
+              height: '8px',
+              background: `hsl(${i * 72}, 80%, 60%)`,
+              borderRadius: '50%',
+              animation: `float 2s infinite ${delay}s`,
+              left: `${15 + (i * 15)}%`,
+              top: `${20 + (i * 10)}%`,
+              boxShadow: `0 0 15px hsl(${i * 72}, 80%, 60%)`
+            }}></div>
+          ))}
+        </div>
+
+        {/* Percentage Display */}
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          fontSize: '1.8rem',
           fontWeight: 'bold',
           color: '#fff',
-          textShadow: '0 0 10px rgba(255,255,255,0.5)',
-          animation: 'pulse 2s ease-in-out infinite' // Faster pulse (2s)
+          textShadow: '0 0 15px rgba(255,255,255,0.3)',
+          animation: 'pulse 2s ease-in-out infinite'
         }}>
           {percentage.toFixed(0)}%
         </div>
