@@ -5,9 +5,10 @@ const LoadingSpinner = ({ minDisplayTime = 4000 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [opacity, setOpacity] = useState(1);
 
-  // Dynamic color based on percentage
+  // Dynamic color scheme
   const hue = percentage * 3.6;
-  const dotColor = `hsl(${hue}, 80%, 60%)`;
+  const primaryColor = `hsl(${hue}, 80%, 60%)`;
+  const secondaryColor = `hsl(${hue + 60}, 80%, 60%)`;
 
   useEffect(() => {
     const startTime = Date.now();
@@ -31,21 +32,30 @@ const LoadingSpinner = ({ minDisplayTime = 4000 }) => {
     return () => clearInterval(interval);
   }, [minDisplayTime]);
 
-  // Inject keyframes globally
+  // Particle system configurations
+  const particleSystems = [
+    { count: 12, size: 6, speed: 2.5, radius: 45, direction: 1 },
+    { count: 18, size: 4, speed: 3.2, radius: 65, direction: -1 },
+    { count: 24, size: 3, speed: 4.0, radius: 85, direction: 1 }
+  ];
+
+  // Inject dynamic keyframes
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
-      @keyframes rotate {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+      @keyframes particle-orbit {
+        0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+        100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
       }
-      @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
+
+      @keyframes particle-pulse {
+        0%, 100% { transform: scale(1); opacity: 0.9; }
+        50% { transform: scale(1.2); opacity: 1; }
       }
-      @keyframes float {
-        0% { transform: translateY(0) scale(1); opacity: 1; }
-        100% { transform: translateY(-80px) scale(0.3); opacity: 0; }
+
+      @keyframes core-glow {
+        0%, 100% { filter: brightness(1) contrast(1); }
+        50% { filter: brightness(1.2) contrast(1.5); }
       }
     `;
     document.head.appendChild(style);
@@ -60,92 +70,99 @@ const LoadingSpinner = ({ minDisplayTime = 4000 }) => {
       justifyContent: 'center',
       alignItems: 'center',
       height: '100vh',
-      background: '#0f0f1f',
+      background: 'radial-gradient(circle at center, #0a0a1a 0%, #000000 100%)',
       position: 'fixed',
       top: 0,
       left: 0,
       right: 0,
       bottom: 0,
       zIndex: 9999,
-      opacity: opacity,
-      transition: 'opacity 0.5s ease-out'
+      opacity,
+      transition: 'opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
     }}>
-      <div style={{ position: 'relative', width: '150px', height: '150px' }}>
-        {/* Smooth Gradient Ring */}
-        <div style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          borderRadius: '50%',
-          background: `conic-gradient(
-            rgba(99, 102, 241, 0.8) 0%,
-            rgba(99, 102, 241, 0.4) 30%,
-            transparent 60%
-          )`,
-          filter: 'blur(12px)',
-          animation: 'rotate 2.5s linear infinite'
-        }}></div>
-
-        {/* Progress Track */}
-        <svg style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          transform: 'rotate(-90deg)'
-        }}>
-          <circle
-            cx="50%"
-            cy="50%"
-            r="45%"
-            fill="transparent"
-            stroke="rgba(255, 255, 255, 0.1)"
-            strokeWidth="4%"
-          />
-        </svg>
-
-        {/* Central Orb */}
+      <div style={{ position: 'relative', width: '200px', height: '200px' }}>
+        {/* Quantum Core */}
         <div style={{
           position: 'absolute',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '30%',
-          height: '30%',
-          background: dotColor,
+          width: '40px',
+          height: '40px',
+          background: `radial-gradient(circle at center, ${primaryColor} 0%, transparent 70%)`,
           borderRadius: '50%',
-          filter: `blur(15px)`,
-          boxShadow: `0 0 40px ${dotColor}`,
-          transition: 'all 0.3s ease-out'
-        }}></div>
+          filter: 'blur(15px)',
+          animation: 'core-glow 2s ease-in-out infinite',
+          boxShadow: `0 0 60px ${primaryColor}`
+        }} />
 
-        {/* Floating Particles */}
-        <div style={{ position: 'absolute', width: '100%', height: '100%' }}>
-          {[0, 0.3, 0.6, 0.9, 1.2].map((delay, i) => (
+        {/* Particle Systems */}
+        {particleSystems.map((system, idx) => (
+          <div key={idx} style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            animation: `particle-orbit ${system.speed}s linear infinite`,
+            animationDirection: system.direction > 0 ? 'normal' : 'reverse'
+          }}>
+            {Array.from({ length: system.count }).map((_, i) => {
+              const angle = (i * 360) / system.count;
+              return (
+                <div key={i} style={{
+                  position: 'absolute',
+                  width: `${system.size}px`,
+                  height: `${system.size}px`,
+                  background: `radial-gradient(circle, ${secondaryColor} 30%, transparent 70%)`,
+                  borderRadius: '50%',
+                  transform: `rotate(${angle}deg) translateX(${system.radius}px)`,
+                  animation: 'particle-pulse 1.5s ease-in-out infinite',
+                  animationDelay: `${i * 0.1}s`,
+                  filter: `blur(${system.size / 2}px)`,
+                  boxShadow: `0 0 15px ${secondaryColor}`
+                }} />
+              );
+            })}
+          </div>
+        ))}
+
+        {/* Floating Quarks */}
+        <div style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%'
+        }}>
+          {Array.from({ length: 25 }).map((_, i) => (
             <div key={i} style={{
               position: 'absolute',
-              width: '8px',
-              height: '8px',
-              background: `hsl(${i * 72}, 80%, 60%)`,
+              width: '4px',
+              height: '4px',
+              background: `rgba(255, 255, 255, ${Math.random() * 0.4 + 0.1})`,
               borderRadius: '50%',
-              animation: `float 2s infinite ${delay}s`,
-              left: `${15 + (i * 15)}%`,
-              top: `${20 + (i * 10)}%`,
-              boxShadow: `0 0 15px hsl(${i * 72}, 80%, 60%)`
-            }}></div>
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `particle-orbit ${Math.random() * 4 + 3}s linear infinite`,
+              filter: 'blur(1px)',
+              transform: `translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px)`
+            }} />
           ))}
         </div>
 
-        {/* Percentage Display */}
+        {/* Holographic Display */}
         <div style={{
           position: 'absolute',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          fontSize: '1.8rem',
-          fontWeight: 'bold',
-          color: '#fff',
-          textShadow: '0 0 15px rgba(255,255,255,0.3)',
-          animation: 'pulse 2s ease-in-out infinite'
+          fontSize: '2rem',
+          fontWeight: 700,
+          color: primaryColor,
+          textShadow: `0 0 25px ${primaryColor}`,
+          fontFamily: 'monospace',
+          letterSpacing: '2px',
+          background: 'rgba(0, 0, 0, 0.3)',
+          padding: '8px 16px',
+          borderRadius: '8px',
+          backdropFilter: 'blur(4px)'
         }}>
           {percentage.toFixed(0)}%
         </div>
