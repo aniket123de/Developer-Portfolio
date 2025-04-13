@@ -22,6 +22,7 @@
     "react-tilt": "^1.0.2",
     "react-typed": "^2.0.12",
     "react-vertical-timeline-component": "^3.5.3",
+    "three": "^0.175.0",
     "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {

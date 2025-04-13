@@ -30,7 +30,7 @@ import {
 
   import ty from '../assets/ty.jpg';
   import lca from '../assets/lca.png';
-  import sm from '../assets/sm.jpg';
+  import lok from '../assets/lok.png';
   
   export const navLinks = [
     {
@@ -224,15 +224,15 @@ import {
         },
       ],
       image: lca,
-      source_code_link: "https://github.com/",
+      source_code_link: "https://github.com/aniket123de/SIH1644",
     },
     {
-      name: "Shelf Master",
+      name: "Lok Seva",
       description:
-        "ShelfMaster is an advanced library management software designed to streamline book storage, cataloging, borrowing, and returning processes, enhancing efficiency for libraries.",
+        "Lok Seva is a web application designed to streamline the process of applying for various government services, making it easier for citizens to access essential services and information.",
       tags: [
         {
-          name: "python",
+          name: "supabase",
           color: "blue-text-gradient",
         },
         {
@@ -240,12 +240,12 @@ import {
           color: "green-text-gradient",
         },
         {
-          name: "css",
+          name: "react",
           color: "pink-text-gradient",
         },
       ],
-      image: sm,
-      source_code_link: "https://github.com/",
+      image: lok,
+      source_code_link: "https://github.com/aniket123de/LokSeva",
     },
   ];
   
