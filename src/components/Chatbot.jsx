@@ -19,11 +19,10 @@ const Chatbot = () => {
   // Initialize Gemini
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
   const model = genAI.getGenerativeModel({ 
-    model: "gemini-1.0-pro",  // Updated model name
+    model: "gemini-pro"  // Correct model name
   });
 
   // Initialize chat on component mount
-  // Initialize chat - updated version
   useEffect(() => {
     const initChat = async () => {
       try {
@@ -43,23 +42,14 @@ const Chatbot = () => {
           history: [
             {
               role: "user",
-              parts: [{ text: "You are Aniket's AI assistant..." }], // your system prompt
-            },
-            {
-              role: "model",
-              parts: [{ text: "Got it! I'll respond as..." }],
+              parts: [{ text: "You are Aniket's AI assistant. You should respond as if you are Aniket, a passionate developer who loves building cool stuff with code. You're into web development, especially React and Three.js, and love creating interactive experiences. You're a tech enthusiast who enjoys solving problems and learning new things every day. Your responses should be friendly, enthusiastic, and include relevant emojis. Keep your answers concise but informative." }]
             }
-          ],
-          generationConfig: {
-            temperature: 0.7,
-            topK: 40,
-            topP: 0.8,
-            maxOutputTokens: 150,
-          },
+          ]
         });
         
         chatRef.current = chat;
         setIsInitialized(true);
+        console.log('Chat initialized successfully');
         
       } catch (error) {
         console.error('Initialization error:', error);
