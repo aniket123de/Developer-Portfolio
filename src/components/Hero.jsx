@@ -61,22 +61,22 @@ const Hero = () => {
 
       {/* Fixed Button */}
       <div className="absolute top-[60%] left-1/2 transform -translate-x-1/2">
-  <button
-    onClick={handleDownload}
-    className={`px-6 py-3 rounded-full font-medium text-lg transition-all duration-300 ${
-      downloaded
-        ? "bg-green-500 text-white hover:scale-105 shadow-lg animate-pulse"
-        : "bg-white text-black hover:bg-green-200 hover:scale-105 shadow-lg animate-pulse"
-    }`}
-    style={{
-      boxShadow: downloaded
-        ? "0 4px 15px rgba(34, 197, 94, 0.4)"
-        : "0 4px 15px rgba(0, 0, 0, 0.2)",
-    }}
-  >
-    {downloaded ? "Downloaded" : "Download Resume"}
-  </button>
-</div>
+        <button
+          onClick={handleDownload}
+          className={`px-6 py-3 rounded-full font-medium text-lg transition-all duration-300 ${
+            downloaded
+              ? "bg-green-500 text-white hover:scale-105 shadow-lg animate-pulse"
+              : "bg-white text-black hover:bg-green-200 hover:scale-105 shadow-lg animate-pulse"
+          }`}
+          style={{
+            boxShadow: downloaded
+              ? "0 4px 15px rgba(34, 197, 94, 0.4)"
+              : "0 4px 15px rgba(0, 0, 0, 0.2)",
+          }}
+        >
+          {downloaded ? "Downloaded" : "Download Resume"}
+        </button>
+      </div>
 
       <div className="absolute bottom-12 w-full flex justify-center items-center">
         <a href="#about">
