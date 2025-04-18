@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, Works, StarsCanvas } from "./components";
+import { About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, Works, StarsCanvas, Chatbot } from "./components";
 import VisitorsInfo from "./components/VisitorsInfo";
 import herobg from "./assets/herobg.png";
 import LoadingSpinner from "./components/LoadingSpinner"; // Import LoadingSpinner
@@ -64,6 +64,7 @@ const App = () => {
           <Contact />
           <StarsCanvas />
         </div>
+        <Chatbot />
       </div>
     </BrowserRouter>
   );
