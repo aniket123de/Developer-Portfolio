@@ -7,11 +7,11 @@ import LoadingSpinner from "./components/LoadingSpinner"; // Import LoadingSpinn
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simulate loading for 3 seconds (you can replace this with actual data fetching)
+  // Simulate loading for 6 seconds (you can replace this with actual data fetching)
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsLoading(false); // Hide spinner after 3 seconds
-    }, 2000); // Reduced from 6000 to 2000
+      setIsLoading(false);
+    }, 6000); // Back to 6 seconds
 
     return () => clearTimeout(timer);
   }, []);
