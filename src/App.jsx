@@ -40,11 +40,17 @@ const App = () => {
           <Navbar />
           <Hero />
         </div>
-        <div style={{ backgroundColor: "#050816" }}>
+        <div style={{ backgroundColor: "#050816", position: "relative" }}>
           <About />
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}>
+            <StarsCanvas />
+          </div>
         </div>
-        <div style={{ backgroundColor: "#050816" }}>
+        <div style={{ backgroundColor: "#050816", position: "relative" }}>
           <Experience />
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}>
+            <StarsCanvas />
+          </div>
         </div>
         <div style={{ position: "relative", zIndex: 0, backgroundColor: "#050816" }}>
           <Tech />
