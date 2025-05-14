@@ -54,6 +54,7 @@ const App = () => {
         </div>
         <div style={{ position: "relative", zIndex: 0, backgroundColor: "#050816" }}>
           <Tech />
+          <StarsCanvas />
         </div>
         <div style={{ backgroundColor: "#050816" }}>
           <Works />
