@@ -11,7 +11,7 @@ const App = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false); // Hide spinner after 3 seconds
-    }, 6000);
+    }, 2000); // Reduced from 6000 to 2000
 
     return () => clearTimeout(timer);
   }, []);
@@ -54,7 +54,6 @@ const App = () => {
         </div>
         <div style={{ position: "relative", zIndex: 0, backgroundColor: "#050816" }}>
           <Tech />
-          <StarsCanvas />
         </div>
         <div style={{ backgroundColor: "#050816" }}>
           <Works />
@@ -67,7 +66,9 @@ const App = () => {
         </div>
         <div style={{ position: "relative", zIndex: 0, backgroundColor: "#050816" }}>
           <Contact />
-          <StarsCanvas />
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}>
+            <StarsCanvas />
+          </div>
         </div>
       </div>
     </BrowserRouter>
