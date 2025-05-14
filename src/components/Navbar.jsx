@@ -16,22 +16,22 @@ const Navbar = () => {
   const socialLinks = [
     {
       icon: faFacebook,
-      url: "https://www.facebook.com/aniket.de.123028",
+      url: "https://www.facebook.com/profile.php?id=100067643394312",
       color: "#1877F2"
     },
     {
       icon: faXTwitter,
-      url: "https://twitter.com",
+      url: "https://x.com/AnkieDe1",
       color: "#1DA1F2"
     },
     {
       icon: faLinkedin,
-      url: "https://www.linkedin.com/in/aniket-de-1a66b/",
+      url: "https://www.linkedin.com/in/aniket-de-505362287/",
       color: "#0077B5"
     },
     {
       icon: faInstagram,
-      url: "https://www.instagram.com/aniket.de.123028/",
+      url: "https://www.instagram.com/aweniket/",
       color: "#E4405F"
     }
   ];
