@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, Works, StarsCanvas, VisitorsInfo } from "./components";
+import { About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, Works, StarsCanvas, VisitorsInfo, GithubStats } from "./components";
 import herobg from "./assets/herobg.png";
 import LoadingSpinner from "./components/LoadingSpinner"; // Import LoadingSpinner
 
@@ -42,15 +42,9 @@ const App = () => {
         </div>
         <div style={{ backgroundColor: "#050816", position: "relative" }}>
           <About />
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}>
-            <StarsCanvas />
-          </div>
         </div>
         <div style={{ backgroundColor: "#050816", position: "relative" }}>
           <Experience />
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}>
-            <StarsCanvas />
-          </div>
         </div>
         <div style={{ position: "relative", zIndex: 0, backgroundColor: "#050816" }}>
           <Tech />
@@ -58,6 +52,9 @@ const App = () => {
         </div>
         <div style={{ backgroundColor: "#050816" }}>
           <Works />
+        </div>
+        <div style={{ backgroundColor: "#050816" }}>
+          <GithubStats />
         </div>
         <div style={{ backgroundColor: "#050816" }}>
           <Feedbacks />

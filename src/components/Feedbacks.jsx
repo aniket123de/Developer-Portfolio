@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Confetti from 'react-confetti';
+import { FiX } from 'react-icons/fi';
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
@@ -114,14 +116,121 @@ const QuizCard = ({ index, question, options, correctAnswer, onScoreUpdate }) =>
   );
 };
 
+const ResultModal = ({ isOpen, onClose, totalScore, maxScore, relationshipStatus }) => {
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="bg-gradient-to-br from-[#1d1836] to-[#2d2b3d] rounded-2xl p-8 max-w-md w-full relative shadow-2xl border border-[#915EFF]/20 overflow-hidden"
+        >
+          {totalScore >= 3 && (
+            <div className="absolute inset-0 pointer-events-none">
+              <Confetti
+                width={window.innerWidth}
+                height={window.innerHeight}
+                recycle={false}
+                numberOfPieces={200}
+                gravity={0.2}
+                style={{ position: 'absolute', top: 0, left: 0 }}
+              />
+            </div>
+          )}
+
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors z-10"
+          >
+            <FiX size={24} />
+          </button>
+
+          {/* Content */}
+          <div className="text-center relative z-10">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-[#915EFF] text-6xl mb-6"
+            >
+              🎯
+            </motion.div>
+            
+            <h3 className="text-white text-3xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              Quiz Complete!
+            </h3>
+            
+            <div className="bg-[#1d1836] rounded-xl p-6 mb-6">
+              <p className="text-secondary text-lg mb-2">
+                Your Score
+              </p>
+              <p className="text-white text-4xl font-bold">
+                {totalScore}/{maxScore}
+              </p>
+            </div>
+
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className={`text-2xl font-bold ${relationshipStatus.color} mb-4`}
+            >
+              {relationshipStatus.status}
+            </motion.div>
+
+            {totalScore === maxScore && (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.4 }}
+                className="mt-4 text-[#915EFF] text-xl font-semibold"
+              >
+                Perfect Score! You're a true friend! 
+              </motion.div>
+            )}
+
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 const Feedbacks = () => {
   const [totalScore, setTotalScore] = useState(0);
   const [questionsAnswered, setQuestionsAnswered] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleScoreUpdate = (score) => {
-    setTotalScore(prev => prev + score);
+    const newScore = totalScore + score;
+    setTotalScore(newScore);
     setQuestionsAnswered(prev => prev + 1);
+    
     if (questionsAnswered + 1 === questions.length) {
       setShowResult(true);
     }
@@ -131,6 +240,10 @@ const Feedbacks = () => {
     return relationshipStatus.reduce((prev, current) => {
       return totalScore >= current.minScore ? current : prev;
     }, relationshipStatus[0]);
+  };
+
+  const handleCloseResult = () => {
+    setShowResult(false);
   };
 
   return (
@@ -167,35 +280,14 @@ const Feedbacks = () => {
           ))}
         </div>
 
-        {/* Final Result */}
-        {showResult && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-10 text-center"
-          >
-            <div className="bg-tertiary rounded-2xl p-8 inline-block max-w-md">
-              <h3 className="text-white text-[24px] font-bold mb-4">
-                Quiz Complete! 🎯
-              </h3>
-              <p className="text-secondary text-[18px] mb-4">
-                You scored {totalScore} out of {questions.length}
-              </p>
-              <p className={`text-[22px] font-bold ${getRelationshipStatus().color}`}>
-                {getRelationshipStatus().status}
-              </p>
-              {totalScore === questions.length && (
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="mt-4 text-[#915EFF]"
-                >
-                  🏆 Perfect Score! You're a true friend! 🏆
-                </motion.div>
-              )}
-            </div>
-          </motion.div>
-        )}
+        {/* Result Modal */}
+        <ResultModal
+          isOpen={showResult}
+          onClose={handleCloseResult}
+          totalScore={totalScore}
+          maxScore={questions.length}
+          relationshipStatus={getRelationshipStatus()}
+        />
       </div>
     </div>
   );
