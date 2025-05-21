@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, Works, StarsCanvas, VisitorsInfo, GithubStats } from "./components";
 import herobg from "./assets/herobg.png";
 import LoadingSpinner from "./components/LoadingSpinner"; // Import LoadingSpinner
+import { Analytics } from "@vercel/analytics/react"; // Import Analytics from Vercel
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -68,6 +69,7 @@ const App = () => {
             <StarsCanvas />
           </div>
         </div>
+        <Analytics /> {/* Add the Vercel Analytics component here */}
       </div>
     </BrowserRouter>
   );
