@@ -84,11 +84,10 @@ export const ModernNavbar = ({ className }) => {
             <motion.a
               key={index}
               href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              target="_blank"              rel="noopener noreferrer"
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
-              className="text-xl"
+              className="text-2xl"
               style={{ color: social.color }}
             >
               <FontAwesomeIcon icon={social.icon} />
@@ -108,9 +107,8 @@ export const ModernNavbar = ({ className }) => {
           {navLinks.map((item, idx) => (
             <a
               key={`mobile-link-${idx}`}
-              href={`#${item.id}`}
-              className={cn(
-                "w-full rounded-md px-4 py-2 text-sm font-medium transition duration-200",
+              href={`#${item.id}`}              className={cn(
+                "w-full rounded-md px-4 py-3 text-base font-medium transition duration-200",
                 active === item.title
                   ? "bg-gray-100 text-black dark:bg-neutral-800 dark:text-white"
                   : "text-neutral-600 hover:bg-gray-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
@@ -125,11 +123,10 @@ export const ModernNavbar = ({ className }) => {
           <div className="mt-4 flex w-full flex-row items-center justify-start gap-4 border-t border-gray-200 pt-4 dark:border-neutral-800">
             {socialLinks.map((social, index) => (
               <a
-                key={`mobile-social-${index}`}
-                href={social.url}
+                key={`mobile-social-${index}`}                href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xl"
+                className="text-2xl"
                 style={{ color: social.color }}
               >
                 <FontAwesomeIcon icon={social.icon} />
@@ -144,14 +141,13 @@ export const ModernNavbar = ({ className }) => {
 
 export const NavBody = ({ children, className, visible }) => {
   return (
-    <motion.div
-      animate={{
+    <motion.div      animate={{
         backdropFilter: visible ? "blur(10px)" : "none",
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-          : "none",
-        width: visible ? "40%" : "100%",
-        y: visible ? 20 : 0,
+          : "0 0 10px rgba(145, 94, 255, 0.2)",
+        width: visible ? "40%" : "80%",
+        y: visible ? 20 : 10,
       }}
       transition={{
         type: "spring",
@@ -161,9 +157,8 @@ export const NavBody = ({ children, className, visible }) => {
       style={{
         minWidth: "800px",
       }}
-      className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full px-4 py-2 lg:flex",
-        visible ? "bg-[#050816]/80 backdrop-blur-md" : "bg-transparent",
+      className={cn(        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full px-6 py-3 lg:flex",
+        visible ? "bg-[#050816]/80 backdrop-blur-md border border-[#915EFF]/30" : "bg-[#050816] border border-[#915EFF]/50",
         className
       )}>
       {children}
@@ -176,25 +171,21 @@ export const NavItems = ({ items, className, onItemClick, activeItem }) => {
 
   return (
     <motion.div
-      onMouseLeave={() => setHovered(null)}
-      className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-400 transition duration-200 hover:text-zinc-200 lg:flex lg:space-x-2",
+      onMouseLeave={() => setHovered(null)}      className={cn(
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-4 text-base font-medium text-zinc-400 transition duration-200 hover:text-zinc-200 lg:flex lg:space-x-4",
         className
       )}>
       {items.map((item, idx) => (
         <a
           onMouseEnter={() => setHovered(idx)}
-          onClick={(e) => onItemClick(e)}
-          className={cn(
-            "relative px-4 py-2",
+          onClick={(e) => onItemClick(e)}          className={cn(            "relative px-5 py-2.5 tracking-wide",
             activeItem === item.name ? "text-white" : "text-zinc-400"
           )}
           key={`link-${idx}`}
-          href={item.link}>
-          {hovered === idx && (
+          href={item.link}>          {hovered === idx && (
             <motion.div
               layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-[#1d1836]" />
+              className="absolute inset-0 h-full w-full rounded-full bg-[#1d1836] border border-[#915EFF]/40 shadow-[0_0_10px_rgba(145,94,255,0.3)]" />
           )}
           <span className="relative z-20">{item.name}</span>
         </a>
@@ -205,26 +196,23 @@ export const NavItems = ({ items, className, onItemClick, activeItem }) => {
 
 export const MobileNav = ({ children, className, visible }) => {
   return (
-    <motion.div
-      animate={{
+    <motion.div      animate={{
         backdropFilter: visible ? "blur(10px)" : "none",
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-          : "none",
-        width: visible ? "90%" : "100%",
-        paddingRight: visible ? "12px" : "0px",
-        paddingLeft: visible ? "12px" : "0px",
-        borderRadius: visible ? "4px" : "2rem",
-        y: visible ? 20 : 0,
+          : "0 0 10px rgba(145, 94, 255, 0.2)",        width: visible ? "90%" : "95%",
+        paddingRight: visible ? "16px" : "20px",
+        paddingLeft: visible ? "16px" : "20px",
+        borderRadius: visible ? "8px" : "2rem",
+        y: visible ? 20 : 10,
       }}
       transition={{
         type: "spring",
         stiffness: 200,
         damping: 50,
       }}
-      className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
-        visible ? "bg-[#050816]/80 backdrop-blur-md" : "bg-transparent",
+      className={cn(        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
+        visible ? "bg-[#050816]/80 backdrop-blur-md border border-[#915EFF]/30" : "bg-[#050816] border border-[#915EFF]/50",
         className
       )}>
       {children}
@@ -272,18 +260,19 @@ export const NavbarLogo = () => {
   return (
     <a
       href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-white"
+      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-base font-normal text-white"
       onClick={() => {
         window.scrollTo(0, 0);
       }}>
       <motion.img
         src={logo}
         alt="logo"
-        width={30}
-        height={30}
+        width={36}
+        height={36}
         whileHover={{ rotate: 360 }}
         transition={{ duration: 0.5 }}
-      />      <span className="font-medium text-white">Aniket De</span>
+      />
+      <span className="font-semibold text-white text-lg">Aniket De</span>
     </a>
   );
 };
