@@ -3,16 +3,21 @@ import { cn } from "../utils/cn";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLinkedin, faFacebook, faInstagram, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faFacebook, faInstagram, faXTwitter, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { navLinks } from "../constants";
 import { logo } from "../assets";
 
 // Social links array for use in component
 const socialLinks = [
   {
-    icon: faFacebook,
-    url: "https://www.facebook.com/profile.php?id=100067643394312",
-    color: "#1877F2"
+    icon: faGithub,
+    url: "https://github.com/aniket123de",
+    color: "#ffffff"
+  },
+  {
+    icon: faLinkedin,
+    url: "https://www.linkedin.com/in/aniket-de-505362287/",
+    color: "#0077B5"
   },
   {
     icon: faXTwitter,
@@ -20,9 +25,9 @@ const socialLinks = [
     color: "#1DA1F2"
   },
   {
-    icon: faLinkedin,
-    url: "https://www.linkedin.com/in/aniket-de-505362287/",
-    color: "#0077B5"
+    icon: faFacebook,
+    url: "https://www.facebook.com/profile.php?id=100067643394312",
+    color: "#1877F2"
   },
   {
     icon: faInstagram,
