@@ -1,4 +1,4 @@
-import { EarthCanvas, ComputersCanvas, StarsCanvas } from './canvas';
+import { EarthCanvas, StarsCanvas } from './canvas';
 import Hero from './Hero';
 import Navbar from './Navbar';
 import ModernNavbar from './ModernNavbar';
@@ -22,7 +22,6 @@ export {
   Feedbacks,
   Contact,
   EarthCanvas, 
-  ComputersCanvas, 
   StarsCanvas,
   VisitorsInfo,
   GithubStats
