@@ -25,8 +25,6 @@ const Tech = () => {
             className="w-24 h-24 flex justify-center items-center rounded-full border-2 shadow-xl p-2 m-2"
             style={{ 
               borderColor: "#915EFF",
-              // Add white background specifically for Github logo to make it visible
-              backgroundColor: technology.name === "Github" ? "#ffffff" : "transparent"
             }}
             key={technology.name}
             whileHover={{
@@ -38,11 +36,21 @@ const Tech = () => {
               stiffness: 300,
             }}
           >
-            <img
-              src={technology.icon}
-              alt={technology.name}
-              className="w-full h-full object-contain"
-            />
+            {technology.name === "Github" ? (
+              <div className="w-16 h-16 rounded-full bg-white flex justify-center items-center">
+                <img
+                  src={technology.icon}
+                  alt={technology.name}
+                  className="w-full h-full object-contain p-1"
+                />
+              </div>
+            ) : (
+              <img
+                src={technology.icon}
+                alt={technology.name}
+                className="w-full h-full object-contain"
+              />
+            )}
           </motion.div>
         ))}
       </div>
