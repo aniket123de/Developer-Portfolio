@@ -23,7 +23,11 @@ const Tech = () => {
         {technologies.map((technology) => (
           <motion.div
             className="w-24 h-24 flex justify-center items-center rounded-full border-2 shadow-xl p-2 m-2"
-            style={{ borderColor: "#915EFF" }}
+            style={{ 
+              borderColor: "#915EFF",
+              // Add white background specifically for Github logo to make it visible
+              backgroundColor: technology.name === "Github" ? "#ffffff" : "transparent"
+            }}
             key={technology.name}
             whileHover={{
               scale: 1.2, // Magnifying effect
