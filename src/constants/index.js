@@ -158,7 +158,7 @@ import {
         "Successfully worked on academic and team projects, demonstrating both technical expertise and collaborative skills",
         "Proficient in multiple programming languages, including [C, Python, JS], with experience in building real-world solutions.",
         "Developed a solid foundation in analytical and problem-solving abilities through coursework, projects, and competitive programming.",
-        "Pursuing B.Tech in Computer Science and Engineering with a current GPA of 8.86, showcasing strong academic performance.",
+        "Pursuing B.Tech in Computer Science and Engineering with a current GPA of 8.99, showcasing strong academic performance.",
       ],
     },
   ];
