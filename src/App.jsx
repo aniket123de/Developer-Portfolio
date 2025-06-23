@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { About, Contact, Experience, Feedbacks, Hero, ModernNavbar, Tech, Works, StarsCanvas, VisitorsInfo, GithubStats } from "./components";
-import herobg from "./assets/herobg.png";
 import LoadingSpinner from "./components/LoadingSpinner"; // Import LoadingSpinner
 import { Analytics } from "@vercel/analytics/react"; // Import Analytics from Vercel
 
@@ -30,14 +29,7 @@ const App = () => {
           backgroundColor: "#050816", // Set default background color to #050816
         }}
       >
-        <div
-          style={{
-            backgroundImage: `url(${herobg})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-          }}
-        >
+        <div style={{ backgroundColor: "#050816" }}>
           <ModernNavbar />
           <Hero />
         </div>
