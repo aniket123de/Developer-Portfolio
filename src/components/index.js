@@ -10,6 +10,7 @@ import Feedbacks from './Feedbacks';
 import Contact from './Contact';
 import VisitorsInfo from './VisitorsInfo';
 import GithubStats from './GithubStats';
+import Threads from './Threads';
 
 export {
   Hero,
@@ -24,5 +25,6 @@ export {
   EarthCanvas, 
   StarsCanvas,
   VisitorsInfo,
-  GithubStats
+  GithubStats,
+  Threads
 }

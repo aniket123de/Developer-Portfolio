@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import Typewriter from "typewriter-effect/dist/core";
 import { styles } from "../styles";
+import Threads from "./Threads";
 
 const Hero = () => {
   const typewriterRef = useRef(null);
@@ -39,6 +40,16 @@ const Hero = () => {
 
   return (
     <section className={`relative w-full h-screen mx-auto`}>
+      {/* Threads Background Animation */}
+      <div className="absolute inset-0 w-full h-full">
+        <Threads
+          color={[0.57, 0.37, 1]}
+          amplitude={1}
+          distance={0}
+          enableMouseInteraction={true}
+        />
+      </div>
+      
       <div
         className={`absolute inset-0 top-[120px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}
       >
