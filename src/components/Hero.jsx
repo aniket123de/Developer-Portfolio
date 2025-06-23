@@ -45,7 +45,7 @@ const Hero = () => {
         <Threads
           color={[0.57, 0.37, 1]}
           amplitude={5}
-          distance={0.9}
+          distance={0}
           enableMouseInteraction={true}
         />
       </div>
