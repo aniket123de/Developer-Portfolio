@@ -67,7 +67,7 @@ const Hero = () => {
             >
               {/* Profile Image */}
               <motion.div
-                className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-[#915EFF] shadow-lg relative"
+                className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#915EFF] shadow-lg relative"
                 animate={{ 
                   boxShadow: [
                     "0 0 20px rgba(145, 94, 255, 0.3)",
