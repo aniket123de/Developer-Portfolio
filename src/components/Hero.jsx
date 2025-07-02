@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Typewriter from "typewriter-effect/dist/core";
 import { styles } from "../styles";
 import Threads from "./Threads";
+import profileImage from "../assets/pp.jpg";
 
 const Hero = () => {
   const typewriterRef = useRef(null);
@@ -51,22 +52,105 @@ const Hero = () => {
       </div>
       
       <div
-        className={`absolute inset-0 top-[120px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}
+        className={`absolute inset-0 top-[120px] max-w-7xl mx-auto ${styles.paddingX}`}
       >
-        <div className="flex flex-col justify-center items-center mt-5">
-          <div className="w-5 h-5 rounded-full bg-[#915EFF]" />
-          <div className="w-1 sm:h-80 h-30 violet-gradient" />
-        </div>
+        {/* Profile Picture with Interactive Animations */}
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-8">
+          <div className="flex flex-col justify-center items-center mt-2 md:mt-5 flex-shrink-0">
+            <motion.div
+              className="relative group cursor-pointer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              {/* Profile Image */}
+              <motion.div
+                className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-[#915EFF] shadow-lg relative"
+                animate={{ 
+                  boxShadow: [
+                    "0 0 20px rgba(145, 94, 255, 0.3)",
+                    "0 0 40px rgba(145, 94, 255, 0.6)",
+                    "0 0 20px rgba(145, 94, 255, 0.3)"
+                  ]
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              >
+                <img
+                  src={profileImage}
+                  alt="Aniket"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-[#915EFF] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+              </motion.div>
+              
+              {/* Floating Particles around Profile */}
+              <motion.div
+                className="absolute -top-2 -right-2 w-3 h-3 bg-[#915EFF] rounded-full"
+                animate={{
+                  y: [-10, 10, -10],
+                  opacity: [0.5, 1, 0.5]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: 0
+                }}
+              />
+              <motion.div
+                className="absolute -bottom-2 -left-2 w-2 h-2 bg-white rounded-full"
+                animate={{
+                  y: [10, -10, 10],
+                  opacity: [0.3, 0.8, 0.3]
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  delay: 1
+                }}
+              />
+              <motion.div
+                className="absolute top-1/2 -left-4 w-1.5 h-1.5 bg-[#915EFF] rounded-full"
+                animate={{
+                  x: [-5, 5, -5],
+                  opacity: [0.4, 0.9, 0.4]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: 0.5
+                }}
+              />
+            </motion.div>
+          </div>
 
-        <div>
-          <h1 className={`${styles.heroHeadText} text-white`}>
-            Hi, I'm <span className="text-[#915EFF]">Aniket</span>
-          </h1>
-          <p
-            ref={typewriterRef}
-            style={{ lineHeight: "1.12" }}
-            className={`${styles.heroSubText} mt-2 text-white-100 leading-relaxed`}
-          ></p>
+          {/* Main Heading - Fixed Position */}
+          <div className="flex-1 min-w-0 relative">
+            <h1 className={`${styles.heroHeadText} text-white`}>
+              Hi, I'm {" "}
+              <span 
+                className="text-[#915EFF] relative inline-block glitch-text"
+                data-text="Aniket"
+              >
+                Aniket
+              </span>
+            </h1>
+            
+            {/* Typewriter text - Absolutely positioned to not affect main heading */}
+            <div className="absolute top-full mt-4 left-0 right-0">
+              <p
+                ref={typewriterRef}
+                style={{ lineHeight: "1.12" }}
+                className={`${styles.heroSubText} text-white-100 leading-relaxed`}
+              ></p>
+            </div>
+          </div>
         </div>
       </div>
 
