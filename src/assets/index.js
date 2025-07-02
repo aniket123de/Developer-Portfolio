@@ -53,5 +53,4 @@ export {
   shopify,
   starbucks,
   tesla,
-  carrent,
 };

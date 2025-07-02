@@ -12,9 +12,6 @@ import {
     git,
     figma,
     docker,
-    carrent,
-    jobit,
-    tripguide,
     threejs,
   } from "../assets";
 
@@ -31,6 +28,8 @@ import {
   import ty from '../assets/ty.jpg';
   import lca from '../assets/lca.png';
   import lok from '../assets/lok.png';
+  import kavach from '../assets/kavach.png';
+  import rang from '../assets/rang.png';
   
   export const navLinks = [
     {
@@ -246,6 +245,48 @@ import {
       ],
       image: lok,
       source_code_link: "https://github.com/aniket123de/LokSeva",
+    },
+    {
+      name: "Kavach",
+      description:
+        "Kavach is a Chrome extension designed to identify and block online trackers, providing enhanced cybersecurity protection while browsing. It helps users maintain privacy and security online.",
+      tags: [
+        {
+          name: "manifest-v3",
+          color: "blue-text-gradient",
+        },
+        {
+          name: "javascript",
+          color: "green-text-gradient",
+        },
+        {
+          name: "gemini",
+          color: "pink-text-gradient",
+        },
+      ],
+      image: kavach,
+      source_code_link: "https://github.com/Anik-Paul-toj/KAVACH_HACKOLUTION",
+    },
+    {
+      name: "Rangmanch",
+      description:
+        "Rangmanch is a comprehensive collaboration platform that connects content creators with brands, acting as a digital manager to streamline partnerships and brand collaborations.",
+      tags: [
+        {
+          name: "react",
+          color: "blue-text-gradient",
+        },
+        {
+          name: "vader",
+          color: "green-text-gradient",
+        },
+        {
+          name: "firebase",
+          color: "pink-text-gradient",
+        },
+      ],
+      image: rang,
+      source_code_link: "https://github.com/aniket123de/Rangmanch",
     },
   ];
   
